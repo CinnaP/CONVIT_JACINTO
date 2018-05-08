@@ -1,0 +1,30 @@
+#N canvas 98 272 1533 560 10;
+#X obj 89 346 displayvalue;
+#X text 86 61 Gathers four different values and sends them via OSC
+to the python script (for screen display).;
+#X text 86 106 Inlets 1-4 are the actual values (often numerical).
+;
+#X text 85 126 Inlets 5-8 are the name of the corresponding values.
+;
+#X msg 89 209 440;
+#X msg 116 234 -12;
+#X msg 199 207 frequency;
+#X msg 226 235 volume;
+#X msg 254 257 delay_time;
+#X msg 144 257 1.045;
+#X msg 171 281 65;
+#X msg 282 281 dry/wet;
+#X text 455 395 [65 \, dry/wet] to address "value4";
+#X text 456 375 [1.045 \, delay_time] to address "value3";
+#X text 455 355 [-12 \, volume] to address "value2";
+#X text 455 336 [440 \, frequency] to address "value1";
+#X text 425 293 This will output the following OSC messages :;
+#X connect 4 0 0 0;
+#X connect 5 0 0 1;
+#X connect 6 0 0 4;
+#X connect 7 0 0 5;
+#X connect 8 0 0 6;
+#X connect 9 0 0 2;
+#X connect 10 0 0 3;
+#X connect 11 0 0 7;
+#X coords 0 560 1 559 200 100 0;

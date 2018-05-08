@@ -1,0 +1,7 @@
+#N canvas 747 360 833 300 10;
+#X obj 46 165 network_postoffice;
+#X text 42 62 Collects all the OSC messages from OSC_postalsend and
+sends them via UDP to the python script. By default connects to IP
+address 127.0.0.1 and port 9001 (because thats where the python script
+reads). MUST BE PRESENT IN THE PATCH OTHERWISE PYTHON AND PD WON'T
+COMMUNICATE.;

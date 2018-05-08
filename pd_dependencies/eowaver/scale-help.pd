@@ -1,0 +1,11 @@
+#N canvas 615 348 729 300 10;
+#X obj 70 93 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X floatatom 67 193 5 0 0 0 - - -, f 5;
+#X text 43 18 Scales a number into a new range. Work as same as max's
+scale object. You can change arguments on the fly.;
+#X obj 67 171 scale 0 127 0 1;
+#X msg 143 134 -1;
+#X connect 0 0 3 0;
+#X connect 3 0 1 0;
+#X connect 4 0 3 3;

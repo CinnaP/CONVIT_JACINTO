@@ -1,0 +1,32 @@
+#N canvas 635 134 632 495 10;
+#X obj 8 465 network_postoffice;
+#X obj 144 320 displayvalue;
+#X obj 144 47 controller_read;
+#X obj 160 193 osc~, f 5;
+#X obj 147 145 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 8800 1;
+#X obj 144 165 * 10;
+#X obj 220 195 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 7800 1;
+#X obj 160 257 dac~;
+#X obj 217 218 / 250;
+#X msg 311 265 pitch;
+#X msg 353 291 volume;
+#X obj 353 200 loadbang;
+#X obj 160 235 *~;
+#X msg 464 217 \; pd dsp 1;
+#X connect 2 0 4 0;
+#X connect 2 1 6 0;
+#X connect 3 0 12 0;
+#X connect 4 0 5 0;
+#X connect 5 0 3 0;
+#X connect 5 0 1 0;
+#X connect 6 0 8 0;
+#X connect 8 0 1 1;
+#X connect 8 0 12 1;
+#X connect 9 0 1 4;
+#X connect 10 0 1 5;
+#X connect 11 0 9 0;
+#X connect 11 0 10 0;
+#X connect 11 0 13 0;
+#X connect 12 0 7 0;
