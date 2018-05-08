@@ -4,6 +4,8 @@ import threading
 import cfg
 import mod
 
+#commentaire TEST
+
 
 server = OSC.OSCServer(cfg.receive_address)
 server.addDefaultHandlers
