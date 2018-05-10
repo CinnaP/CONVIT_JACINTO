@@ -1,4 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
+import Adafruit_GPIO.SPI as SPI
 import Adafruit_SSD1306 as adafruit
 import os
 
@@ -8,27 +9,36 @@ run = 1
 
 #____________________SCREEN VARIABLES____________________#
 
-# 128x64 
-disp = adafruit.SSD1306_128_64(rst=None, i2c_address=0x3c)
-disp2 = adafruit.SSD1306_128_64(rst=None, i2c_address=0x3d)
+# Raspberry Pi pin configuration:
+RST = 24
+DC = 23
+SPI_PORT = 0
+SPI_DEVICE = 0
+
+# 128x32 display with hardware SPI:
+disp = adafruit.SSD1306_128_32(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
+
+# 128x64 display with hardware I2C
+#disp = adafruit.SSD1306_128_64(rst=None, i2c_address=0x3c)
+#disp2 = adafruit.SSD1306_128_64(rst=None, i2c_address=0x3d)
 disp.begin()
-disp2.begin()
+#disp2.begin()
 #disp.clear()
 #disp.display()
 width = disp.width
 height = disp.height
 
 image = Image.new('1', (width, height))
-image2 = Image.new('1', (width, height))
+#image2 = Image.new('1', (width, height))
 
 draw = ImageDraw.Draw(image)
-draw2 = ImageDraw.Draw(image2)
+#draw2 = ImageDraw.Draw(image2)
 
 top = 0
 bottom = height
 
 font = ImageFont.load_default()
-numberfont = ImageFont.truetype("fonts/squarefont/Square.ttf", 16)
+numberfont = ImageFont.load_default()
 
 
 #____________________OSC VARIABLES____________________#
@@ -36,6 +46,7 @@ numberfont = ImageFont.truetype("fonts/squarefont/Square.ttf", 16)
 display_value_flag = 1
 display_patch_list_flag = 1
 display_menu_flag = 1
+display_table_flag = 1
 
 value1_name = ""
 value1 = "0"

@@ -10,7 +10,7 @@ def remap(x):
     old_min = -1
     old_max = 1
     new_min = 0
-    new_max = 64
+    new_max = 32
     x = (x - old_min)/(old_max - old_min)*(new_max - new_min) + new_min
     return(x)
 
@@ -121,10 +121,12 @@ def display_table():
     """
     cfg.draw.rectangle((0,0,cfg.width,cfg.height), outline=0, fill=0)
     for i, j in enumerate(cfg.table):
-        cfg.draw.point((i, remap(j)), fill=255)
+        cfg.draw.point((i, j), fill=255)
     cfg.disp.image(cfg.image)
     cfg.disp.display()
     cfg.disp.clear()
+    #cfg.display_table_flag = 0
+    #print("table displayed")
 
 def display_menu():
     """
@@ -233,6 +235,8 @@ def change_table(addr, tags, stuff, source):
     changes the values of the list containing the array/waveform 
     """
     cfg.table = stuff
+    #cfg.display_table_flag = 1
+    #print ("table changed")
     #print cfg.table
 
 

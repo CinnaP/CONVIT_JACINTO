@@ -29,12 +29,12 @@ st.start()
 mod.display_patch_list()
 mod.open_patch()
 
-mod.display_menu()
+#mod.display_menu()
 
 while(cfg.run==1):
-
-    mod.display_value()
-    mod.display_menu()
+    pass
+    mod.display_table()
+    time.sleep(0.03)
 
 mod.end_this()        
 mod.display_black_screen1()
