@@ -3,16 +3,11 @@ import psutil
 import sys
 import subprocess
 import cfg
+import os #pas utile
 
 #______________________________ UTILITY FONCTIONS ______________________________#
 
-def remap(x):
-    old_min = -1
-    old_max = 1
-    new_min = 0
-    new_max = 32
-    x = (x - old_min)/(old_max - old_min)*(new_max - new_min) + new_min
-    return(x)
+
 
 #______________________________ DISPLAY FONCTIONS ______________________________#
 
@@ -121,7 +116,7 @@ def display_table():
     """
     cfg.draw.rectangle((0,0,cfg.width,cfg.height), outline=0, fill=0)
     for i, j in enumerate(cfg.table):
-        cfg.draw.point((i, j), fill=255)
+        cfg.draw.point((i, cfg.height-j-1), fill=255)
     cfg.disp.image(cfg.image)
     cfg.disp.display()
     cfg.disp.clear()
@@ -250,7 +245,8 @@ def open_patch():
     global proc
     cfg.patch_number = sys.stdin.readline()
     cfg.patch_name = cfg.patch_list[int(cfg.patch_number)]
-    proc = subprocess.Popen(["pd", cfg.patch_name], cwd=cfg.patch_folder,
+    cfg.patch_name = "/" + cfg.patch_name
+    proc = subprocess.Popen(["pd", "main.pd"], cwd=cfg.patch_folder+cfg.patch_name,
                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     display_loading_screen()
 
@@ -262,8 +258,9 @@ def change_patch():
     global proc
     cfg.patch_number = sys.stdin.readline()
     cfg.patch_name = cfg.patch_list[int(cfg.patch_number)]
+    cfg.patch_name = "/" + cfg.patch_name
     proc.kill()
-    proc = subprocess.Popen(["pd", cfg.patch_name], cwd=cfg.patch_folder,
+    proc = subprocess.Popen(["pd", cfg.patch_name], cwd=cfg.patch_folder+cfg.patch_name,
                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     display_loading_screen()
     cfg.page = 1
@@ -276,7 +273,7 @@ def write_save_slot():
     with open("save_slot.txt", "w") as f:
         f.write("%s" % (cfg.patch_name))
 
-def read_save_slot():
+def read_save_slot_and_open():
     """
     Reads the content of save_slot.txt which contains the last opened patch's name, then changes
     the value of cfg.patch_name. This allows to open the same patch after shutdown.

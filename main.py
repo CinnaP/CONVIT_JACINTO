@@ -22,8 +22,7 @@ st = threading.Thread(target=server.serve_forever)
 st.start()
 
 # OPEN LAST PATCH
-#mod.read_save_slot()
-#mod.open_patch()
+#mod.read_save_slot_and_open()
 
 #CHOSE YOUR PATCH
 mod.display_patch_list()
@@ -32,7 +31,6 @@ mod.open_patch()
 #mod.display_menu()
 
 while(cfg.run==1):
-    pass
     mod.display_table()
     time.sleep(0.03)
 

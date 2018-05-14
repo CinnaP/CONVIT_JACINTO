@@ -10,17 +10,14 @@ run = 1
 #____________________SCREEN VARIABLES____________________#
 
 # Raspberry Pi pin configuration:
-RST = 24
 DC = 23
+RST = 24
 SPI_PORT = 0
 SPI_DEVICE = 0
 
 # 128x32 display with hardware SPI:
 disp = adafruit.SSD1306_128_32(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
 
-# 128x64 display with hardware I2C
-#disp = adafruit.SSD1306_128_64(rst=None, i2c_address=0x3c)
-#disp2 = adafruit.SSD1306_128_64(rst=None, i2c_address=0x3d)
 disp.begin()
 #disp2.begin()
 #disp.clear()
@@ -68,11 +65,11 @@ receive_address = '127.0.0.1', 9001
 
 #____________________SYSTEM VARIABLES____________________#
 
-patch_folder = os.getcwd() + '/HERE' #name of the folder containing the patches
-patch_list = os.listdir(patch_folder) #list of files in the previous folder
+patch_folder = os.getcwd() + '/PRESETS' #name of the folder containing the patches
+patch_list = os.listdir(patch_folder) #list of atmnt folder in the previous folder
 folder_list_size = len(patch_list) #size of the previous list
 patch_number = 0 #number of the current patch according to the list
-patch_name = "" #name of the current patch
+patch_name = "" #name of the current atmtn folder
 
 
 
