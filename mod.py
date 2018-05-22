@@ -59,26 +59,18 @@ def display_value():
     """
     #if cfg.display_value_flag == 1:
     cfg.display_value_flag = 0
+    pot1_angle = 135 + cfg.value1*2.36
+    if (pot1_angle>=406):
+        pot1_angle=405
+    if (pot1_angle<=134):
+        pot1_angle=135
+    cfg.disp2.clear()
     cfg.draw2.rectangle((0,0,cfg.width,cfg.height), outline=0, fill=0)
-        
-    cfg.draw2.line((0, cfg.height/2, cfg.width, cfg.height/2), fill=255)
-    cfg.draw2.line((cfg.width/2, 0, cfg.width/2, cfg.bottom), fill=255)
-        
-    cfg.draw2.text((3, 0), cfg.value1_name, font=cfg.font, fill=255)
-    cfg.draw2.text((cfg.width/2 + 3, 0), cfg.value2_name, font=cfg.font, fill=255)
-    cfg.draw2.text((3, cfg.height/2 +2), cfg.value3_name, font=cfg.font, fill=255)
-    cfg.draw2.text((cfg.width/2 + 3, cfg.height/2 +2), cfg.value4_name, font=cfg.font, fill=255)
-        
-    cfg.draw2.text((13, 15), str(cfg.value1), font=cfg.numberfont, fill=255)
-    cfg.draw2.text((cfg.width/2+13, 15), str(cfg.value2), font=cfg.numberfont, fill=255)
-    cfg.draw2.text((13, cfg.height/2 +15), str(cfg.value3), font=cfg.numberfont, fill=255)
-    cfg.draw2.text((cfg.width/2 +13, cfg.height/2 +15), str(cfg.value4), font=cfg.numberfont, fill=255)
-        
+    cfg.draw2.text((9, 12), str(cfg.value1), font=cfg.font, fill=255)
+    cfg.draw2.arc([0, 0 , 32, 32], 135, pot1_angle, fill=255)
     cfg.disp2.image(cfg.image2)
     cfg.disp2.display()
-    cfg.disp2.clear()
-    #else:
-     #   pass
+    #print "we print"
 
 def display_info():
     """

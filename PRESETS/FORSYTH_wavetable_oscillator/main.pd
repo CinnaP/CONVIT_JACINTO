@@ -1,4 +1,4 @@
-#N canvas 274 107 1278 752 10;
+#N canvas 273 113 1278 752 10;
 #X declare -path patch_editor_abs;
 #X obj 6 708 declare -path patch_editor_abs;
 #N canvas 447 50 707 551 patch-editor-do-not-delete 0;
@@ -4407,7 +4407,7 @@ more elaborate pd-code for deeper control.;
 #X obj 204 151 r open-organelle-map!;
 #X msg 204 198 \; pd-organelle-map vis \$1;
 #X obj 203 272 r open-modules!;
-#N canvas 647 101 624 752 modules 0;
+#N canvas 646 107 624 752 modules 0;
 #X obj 13 425 cnv 15 180 15 empty empty MODULATION: 10 8 0 12 -158136
 -262144 0;
 #X obj 13 446 bng 15 250 50 0 \$0-create-basic-lfo! empty <--BASIC-LFO
@@ -5471,9 +5471,10 @@ for more details.;
 #X obj 910 161 / 1024;
 #X obj 794 179 sig~;
 #X msg 798 156 0.999;
+#X obj 86 453 display_value;
+#X floatatom 480 93 5 0 0 0 - - -, f 5;
 #X connect 9 0 20 0;
 #X connect 12 0 11 1;
-#X connect 13 0 14 0;
 #X connect 13 1 17 0;
 #X connect 13 2 26 0;
 #X connect 13 4 24 0;
@@ -5491,3 +5492,5 @@ for more details.;
 #X connect 24 0 22 0;
 #X connect 25 0 21 0;
 #X connect 26 0 25 0;
+#X connect 28 0 14 0;
+#X connect 28 0 27 0;

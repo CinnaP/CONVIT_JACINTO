@@ -32,6 +32,7 @@ mod.open_patch()
 
 while(cfg.run==1):
     mod.display_table()
+    mod.display_value()
     time.sleep(0.03)
 
 mod.end_this()        

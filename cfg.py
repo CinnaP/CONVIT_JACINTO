@@ -10,26 +10,37 @@ run = 1
 #____________________SCREEN VARIABLES____________________#
 
 # Raspberry Pi pin configuration:
-DC = 23
-RST = 24
-SPI_PORT = 0
-SPI_DEVICE = 0
+DC1 = 23
+RST1 = 24
+SPI_PORT1 = 0
+SPI_DEVICE1 = 0
+
+DC2 = 12
+RST2 = 16
+SPI_PORT2 = 0
+SPI_DEVICE2 = 1
 
 # 128x32 display with hardware SPI:
-disp = adafruit.SSD1306_128_32(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
+disp = adafruit.SSD1306_128_32(rst=RST1, dc=DC1, spi=SPI.SpiDev(SPI_PORT1, SPI_DEVICE1, max_speed_hz=8000000))
+disp2 = adafruit.SSD1306_128_32(rst=RST2, dc=DC2, spi=SPI.SpiDev(SPI_PORT2, SPI_DEVICE2, max_speed_hz=8000000))
 
 disp.begin()
-#disp2.begin()
-#disp.clear()
-#disp.display()
+disp2.begin()
+
+disp.clear()
+disp2.clear()
+
+disp.display()
+disp2.display()
+
 width = disp.width
 height = disp.height
 
 image = Image.new('1', (width, height))
-#image2 = Image.new('1', (width, height))
+image2 = Image.new('1', (width, height))
 
 draw = ImageDraw.Draw(image)
-#draw2 = ImageDraw.Draw(image2)
+draw2 = ImageDraw.Draw(image2)
 
 top = 0
 bottom = height
@@ -46,7 +57,7 @@ display_menu_flag = 1
 display_table_flag = 1
 
 value1_name = ""
-value1 = "0"
+value1 = 0
 value2_name = ""
 value2 = "0"
 value3_name = ""
@@ -70,7 +81,3 @@ patch_list = os.listdir(patch_folder) #list of atmnt folder in the previous fold
 folder_list_size = len(patch_list) #size of the previous list
 patch_number = 0 #number of the current patch according to the list
 patch_name = "" #name of the current atmtn folder
-
-
-
-
