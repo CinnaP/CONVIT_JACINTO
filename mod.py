@@ -123,8 +123,8 @@ def display_menu():
         cfg.display_menu_flag = 0
         cfg.draw.rectangle((0,0,cfg.width,cfg.height), outline=0, fill=0)
         cfg.draw.rectangle(cfg.menu_cursor, outline=0, fill=255)
-        cfg.draw.text((8, 0), "INFOS", font=cfg.font, fill=255)
-        cfg.draw.text((8, 8), "TABLE", font=cfg.font, fill=255)
+        cfg.draw.text((8, 0), "WAVEFORM", font=cfg.font, fill=255)
+        cfg.draw.text((8, 8), "INFOS", font=cfg.font, fill=255)
         cfg.draw.text((8, 16), "SAVE PATCH", font=cfg.font, fill=255)
         cfg.draw.text((8, 24), "LOAD PATCH", font=cfg.font, fill=255)
         cfg.draw.text((8, 32), "QUIT", font=cfg.font, fill=255)
@@ -197,25 +197,38 @@ def receive_value(addr, tags, stuff, source):
             cfg.value4 = round(value, 2)
         cfg.display_value_flag = 1
 
-def cursor_receive(addr, tags, stuff, source):
+def cursor_receive_updown(addr, tags, stuff, source):
     value = stuff[0]
     if value == 1.0:
         cursor_move("up")
     if value == 0.0:
         cursor_move("down")
 
-def cursor_clic(addr, tags, stuff, source):
-    if cfg.menu_line == 1: # INFOS
-        display_info()
-    if cfg.menu_line == 2: #TABLE
-        display_table
-    if cfg.menu_line == 3: #SAVE
-        pass
-    if cfg.menu_line == 4: #LOAD
-        display_patch_list()
-    if cfg.menu_line == 5: #QUIT
-        cfg.run = 0
-        
+def cursor_receive_leftright(addr, tags, stuff, source):
+    value = stuff[0]
+    if value == 1.0:
+        menu_enter()
+    if value == 0.0:
+        menu_back()
+
+def menu_enter():
+    cfg.display_menu_flag = 1
+    if cfg.menu_line == 1:
+        cfg.page = 1
+    if cfg.menu_line == 2:
+        cfg.page = 2
+    if cfg.menu_line == 3:
+        cfg.page = 3
+    if cfg.menu_line == 4:
+        cfg.page = 4
+    if cfg.menu_line == 5:
+        cfg.page = 5
+
+def menu_back():
+    cfg.display_patch_list_flag = 1
+    cfg.page = 0
+    cursor_move("init")
+    display_menu()
 
 def change_table(addr, tags, stuff, source):
     """
@@ -272,11 +285,17 @@ def read_save_slot_and_open():
     """
     with open("save_slot.txt", "r") as f:
         cfg.patch_name = f.read()
+    proc = subprocess.Popen(["pd", "main.pd"], cwd=cfg.patch_folder+cfg.patch_name,
+                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    display_loading_screen()
 
 def end_this():
     """
     end of the world
     """
+    display_black_screen1()
+    display_black_screen2()
     global proc
     write_save_slot()
+    
     proc.kill()

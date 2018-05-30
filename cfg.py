@@ -21,8 +21,8 @@ SPI_PORT2 = 0
 SPI_DEVICE2 = 1
 
 # 128x32 display with hardware SPI:
-disp = adafruit.SSD1306_128_32(rst=RST1, dc=DC1, spi=SPI.SpiDev(SPI_PORT1, SPI_DEVICE1, max_speed_hz=8000000))
-disp2 = adafruit.SSD1306_128_32(rst=RST2, dc=DC2, spi=SPI.SpiDev(SPI_PORT2, SPI_DEVICE2, max_speed_hz=8000000))
+disp = adafruit.SSD1306_128_64(rst=RST1, dc=DC1, spi=SPI.SpiDev(SPI_PORT1, SPI_DEVICE1, max_speed_hz=8000000))
+disp2 = adafruit.SSD1306_128_64(rst=RST2, dc=DC2, spi=SPI.SpiDev(SPI_PORT2, SPI_DEVICE2, max_speed_hz=8000000))
 
 disp.begin()
 disp2.begin()
@@ -65,9 +65,9 @@ value3 = "0"
 value4_name = ""
 value4 = "0"
 
-# normalement 1
 menu_line = 1
 menu_cursor = [2, 2, 6, 6]
+page = 0
 
 table = []
 
